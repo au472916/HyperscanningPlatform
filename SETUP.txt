@@ -1,0 +1,40 @@
+BCM2835
+	cd ~
+	wget http://www.airspayce.com/mikem/bcm2835/bcm2835-1.50.tar.gz 			
+	tar zxvf bcm2835-1.50.tar.gz 
+	cd bcm2835-1.50
+	./configure
+	make
+	sudo make check
+	sudo make install
+
+
+	
+LAB STREAMING LAYER
+	sudo apt-get update
+	sudo apt-get install cmake
+	sudo apt-get install git
+	
+	cd ~
+	git clone https://github.com/sccn/labstreaminglayer.git 		
+	cd labstreaminglayer/LSL/liblsl
+	nano ./src/CMakeLists.txt		//remove line 29: legacy/legacy_abi.cpp
+
+	mkdir build	
+	cd build
+	cmake ..    	
+	make		
+
+	sudo cp ./src/liblsl.so /usr/lib/	
+
+	ldconfig -n /usr/lib/liblsl.so		
+
+ADS1299
+	cd ~
+	git clone https://github.com/au472916/HyperscanningPlatform.git
+	cd urban-fortnight/
+	gcc -Lusr/local/lib/lsl -o prog mainProg.c ads1299.c -llsl -lbcm2835
+	
+Run the program with:
+	sudo ./prog
+	
